@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int maxx = 10000;
+        int maxx = 2000;
         int[] array = new int[maxx];
         Random generator = new Random();
 
@@ -21,19 +21,21 @@ public class Main {
 
         int[] arr = new int[maxx];
 
+        int[] masiv = new int[]{0, 2, 6, 3, 2, 7, 8, 33, 1, 4, 5, 10, 9};
+
         System.arraycopy(array, 0, arr, 0, array.length);
         long startTime = System.nanoTime();
-        Sorter.quickSort(arr);
+        Sorter.heapSort(arr);
         long endTime = System.nanoTime();
         double duration = (double)(endTime - startTime);
-        System.out.printf("quick sort: %f\n", duration/1000000 );
+        System.out.printf("heap sort: %f\n", duration/1000000 );
 
         System.arraycopy(array, 0, arr, 0, array.length);
         startTime = System.nanoTime();
-        Sorter.bubbleSort(arr);
+        Sorter.quickSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
-        System.out.printf("bubble sort: %f\n", duration/1000000 );
+        System.out.printf("quick sort: %f\n", duration/1000000 );
 
         System.arraycopy(array, 0, arr, 0, array.length);
         startTime = System.nanoTime();
@@ -49,5 +51,11 @@ public class Main {
         duration = (double)(endTime - startTime);
         System.out.printf("selection sort: %f\n", duration/1000000 );
 
+        System.arraycopy(array, 0, arr, 0, array.length);
+        startTime = System.nanoTime();
+        Sorter.bubbleSort(arr);
+        endTime = System.nanoTime();
+        duration = (double)(endTime - startTime);
+        System.out.printf("bubble sort: %f\n", duration/1000000 );
     }
 }

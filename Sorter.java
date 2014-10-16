@@ -85,4 +85,51 @@ public class Sorter {
             quickSort(array, p + 1, right);
         }
     }
+
+    public static void siftDown(int array[], int start, int end){
+        int root = start;
+
+        while (root * 2 + 1 <= end){
+            int child = root * 2 + 1;
+            int swapI = root;
+
+            if (array[swapI] < array[child])
+                swapI = child;
+            if (child + 1 <= end && array[swapI] < array[child + 1])
+                swapI = child + 1;
+            if (swapI != root){
+                swap(array, root, swapI);
+                root = swapI;
+            }
+            else
+                return;
+        }
+    }
+
+
+    public static void heapify(int array[], int numberOfElements){
+        int start = ((numberOfElements - 2) / 2);
+
+        while (start >= 0){
+            siftDown(array, start, numberOfElements - 1);
+            start--;
+        }
+    }
+
+    public static void heapSort(int array[]){
+        heapSort(array, array.length);
+    }
+
+    public static void heapSort(int array[], int numberOfElements){
+
+        heapify(array, numberOfElements);
+
+        int end = numberOfElements - 1;
+
+        while (end > 0){
+            swap(array, end, 0);
+            end--;
+            siftDown(array, 0, end);
+        }
+    }
 }
