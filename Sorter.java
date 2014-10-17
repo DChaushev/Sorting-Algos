@@ -1,5 +1,7 @@
 package com.sortations;
 
+import java.lang.reflect.Array;
+
 public class Sorter {
 
     private static void swap(int[] array, int i, int j){
@@ -130,6 +132,46 @@ public class Sorter {
             swap(array, end, 0);
             end--;
             siftDown(array, 0, end);
+        }
+    }
+
+
+    public static void mergeSort(int array[]){
+        int temp[] = new int[array.length];
+        mergeSort(array, 0, array.length - 1, temp);
+    }
+
+    public static void merge(int array[], int start, int middle, int end, int temp[]) {
+
+        for (int i = start; i <= end; i++) {
+            temp[i] = array[i];
+        }
+        int i = start;
+        int j = middle + 1;
+        int k = start;
+        while (i <= middle && j <= end) {
+            if (temp[i] <= temp[j]) {
+                array[k] = temp[i];
+                i++;
+            } else {
+                array[k] = temp[j];
+                j++;
+            }
+            k++;
+        }
+        while (i <= middle) {
+            array[k] = temp[i];
+            k++;
+            i++;
+        }
+    }
+
+    private static void mergeSort(int array[], int start, int end, int temp[]){
+        if (start < end) {
+            int middle = start + (end - start) / 2;
+            mergeSort(array, start, middle, temp);
+            mergeSort(array, middle + 1, end, temp);
+            merge(array, start, middle, end, temp);
         }
     }
 }

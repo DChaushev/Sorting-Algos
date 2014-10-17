@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int maxx = 2000;
+        int maxx = 10;
         int[] array = new int[maxx];
         Random generator = new Random();
 
@@ -29,6 +29,13 @@ public class Main {
         long endTime = System.nanoTime();
         double duration = (double)(endTime - startTime);
         System.out.printf("heap sort: %f\n", duration/1000000 );
+
+        System.arraycopy(array, 0, arr, 0, array.length);
+        startTime = System.nanoTime();
+        Sorter.mergeSort(arr);
+        endTime = System.nanoTime();
+        duration = (double)(endTime - startTime);
+        System.out.printf("merge sort: %f\n", duration/1000000 );
 
         System.arraycopy(array, 0, arr, 0, array.length);
         startTime = System.nanoTime();
