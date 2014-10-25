@@ -1,5 +1,6 @@
 package com.sortations;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
@@ -12,6 +13,49 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //HeapTest
+        ArrayList<Integer> l = new ArrayList();
+        l.add(2);
+        l.add(5);
+        l.add(-25);
+        l.add(55);
+        l.add(-2);
+        l.add(23);
+        Heap h = new Heap(l);
+        h.add(1);
+        h.add(5);
+        h.add(2);
+        h.add(3);
+        h.add(7);
+        h.add(-1);
+        h.add(4);
+        h.add(3);
+        h.add(14);
+        h.add(41);
+        h.add(45);
+
+        System.out.println(h);
+        System.out.printf("Max element: %d\n", h.getMax());
+
+        h.delete();
+        System.out.println(h);
+        System.out.printf("Max element: %d\n", h.getMax());
+
+        h.delete(1);
+        System.out.println(h);
+        System.out.printf("Max element: %d\n", h.getMax());
+
+        h.delete();
+        System.out.println(h);
+        System.out.printf("Max element: %d\n", h.getMax());
+
+        l = h.sort();
+        System.out.println(l);
+        //End of HeapTest
+
+        System.out.println();
+
+        //SortationsTest
         int maxx = 10;
         int[] array = new int[maxx];
         Random generator = new Random();
