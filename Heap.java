@@ -42,14 +42,21 @@ public class Heap {
     }
 
     private void moveUp(int i) {
-        while (heap.get(i) > heap.get(parent(i))) {
+        if(isEmpty()) {
+            System.out.println("Heap is empty");
+            return;
+        }
+        while (parent(i) >= 0 && heap.get(i) > heap.get(parent(i))) {
             swap(i, parent(i));
             i = parent(i);
         }
     }
 
     private void moveDown(int i) {
-
+        if(isEmpty()) {
+            System.out.println("Heap is empty");
+            return;
+        }
         while (heap.get(i) < heap.get(leftChild(i)) || heap.get(i) < heap.get(rightChild(i))) {
             if (heap.get(leftChild(i)) > heap.get(rightChild(i))) {
                 swap(i, leftChild(i));
@@ -62,6 +69,10 @@ public class Heap {
     }
 
     private void heapify(int i) {
+        if(isEmpty()) {
+//            System.out.println("Heap is empty");
+            return;
+        }
         if (heap.get(i) > heap.get(parent(i)))
             moveUp(i);
         else if (heap.get(i) < heap.get(leftChild(i)) || heap.get(i) < heap.get(rightChild(i)))
@@ -96,21 +107,15 @@ public class Heap {
     }
 
     public boolean isEmpty() {
-        if (length > 0) {
-            return false;
-        }
-        return true;
+        return length <= 0;
     }
 
-    public int length() {
+    public int getLength() {
         return this.length;
     }
 
     private int parent(int i) {
-        int r = (i - 1) / 2;
-        if (r < 0)
-            return 0;
-        return r;
+        return (i - 1) / 2;
     }
 
     private int leftChild(int i) {
