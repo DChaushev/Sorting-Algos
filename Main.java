@@ -52,7 +52,7 @@ public class Main {
         System.out.println();
 
         //SortationsTest
-        int maxx = 10;
+        int maxx = 10000;
         Integer[] arr = new Integer[maxx];
         Random generator = new Random();
 
@@ -62,15 +62,13 @@ public class Main {
             hTestSort.add(arr[i]);
         }
 
-        Sorter sort = new Sorter(arr);
-
-        sort.printArray();
+        //Sorter.printArray(arr);
         long startTime = System.nanoTime();
-        sort.heapSort();
+        Sorter.heapSort(arr);
         long endTime = System.nanoTime();
         double duration = (double)(endTime - startTime);
         System.out.printf("heap sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
 
         startTime = System.nanoTime();
         hTestSort.sort();
@@ -78,55 +76,55 @@ public class Main {
         duration = (double)(endTime - startTime);
         System.out.printf("heap Struct sort: %f\n", duration/1000000 );
 
-        System.out.print("Shuffle: ");
-        sort.shuffle();
-        sort.printArray();
+        //System.out.print("Shuffle: ");
+        Sorter.shuffle(arr);
+        //Sorter.printArray(arr);
         startTime = System.nanoTime();
-        sort.mergeSort();
+        Sorter.mergeSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
         System.out.printf("merge sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
 
-        System.out.print("Shuffle: ");
-        sort.shuffle();
-        sort.printArray();
+        //System.out.print("Shuffle: ");
+        Sorter.shuffle(arr);
+        //Sorter.printArray(arr);
         startTime = System.nanoTime();
-        sort.quickSort();
+        Sorter.quickSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
         System.out.printf("quick sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
 
-        System.out.print("Shuffle: ");
-        sort.shuffle();
-        sort.printArray();
+        //System.out.print("Shuffle: ");
+        Sorter.shuffle(arr);
+        //Sorter.printArray(arr);
         startTime = System.nanoTime();
-        sort.insertionSort();
+        Sorter.insertionSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
         System.out.printf("insertion sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
 
-        System.out.print("Shuffle: ");
-        sort.shuffle();
-        sort.printArray();
+        //System.out.print("Shuffle: ");
+        Sorter.shuffle(arr);
+        //Sorter.printArray(arr);
         startTime = System.nanoTime();
-        sort.selectionSort();
+        Sorter.selectionSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
         System.out.printf("selection sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
 
         //System.arraycopy(array, 0, arr, 0, array.length);
-        System.out.print("Shuffle: ");
-        sort.shuffle();
-        sort.printArray();
+        //System.out.print("Shuffle: ");
+        Sorter.shuffle(arr);
+        //Sorter.printArray(arr);
         startTime = System.nanoTime();
-        sort.bubbleSort();
+        Sorter.bubbleSort(arr);
         endTime = System.nanoTime();
         duration = (double)(endTime - startTime);
         System.out.printf("bubble sort: %f\n", duration/1000000 );
-        sort.printArray();
+        //Sorter.printArray(arr);
     }
 }

@@ -2,34 +2,16 @@ package com.sortations;
 
 import java.util.Random;
 
-public class Sorter<T extends Comparable<? super T>> {
+public class Sorter {
 
-    private T[] array;
-    private int numberOfElements;
-
-    public Sorter(T[] inputArray){
-        numberOfElements = inputArray.length;
-        setArray(inputArray);
-    }
-
-    private void setArray(T[] inputArray){
-        array = (T[])java.lang.reflect.Array
-                .newInstance(inputArray.getClass().getComponentType(), numberOfElements);
-        for (int i = 0; i < inputArray.length; i++)
-            array[i] = inputArray[i];
-    }
-
-    private void swap(int i, int j){
+    private static <T extends Comparable<? super T>> void swap(T[] array, int i, int j){
         T tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
     }
 
-//    public void bubbleSort(int[] array){
-//        bubbleSort(array, array.length);
-//    }
 
-    public void bubbleSort(){
+    public static <T extends Comparable<? super T>> void bubbleSort(T[] array){
 
         int n = array.length;
 
@@ -37,7 +19,7 @@ public class Sorter<T extends Comparable<? super T>> {
             int newN = 0;
             for (int i = 1; i < n; i++){
                 if(array[i-1].compareTo(array[i]) > 0){
-                    swap(i-1, i);
+                    swap(array, i-1, i);
                     newN = i;
                 }
             }
@@ -45,11 +27,9 @@ public class Sorter<T extends Comparable<? super T>> {
         }
     }
 
-//    public static void insertionSort(int[] array){
-//        insertionSort(array, array.length);
-//    }
-//
-    public void insertionSort(){
+
+    public static <T extends Comparable<? super T>> void insertionSort(T[] array){
+        int numberOfElements = array.length;
         for(int i = 1; i < numberOfElements; i++){
             T x = array[i];
             int j = i;
@@ -61,11 +41,9 @@ public class Sorter<T extends Comparable<? super T>> {
         }
     }
 
-//    public static void selectionSort(int array[]){
-//        selectionSort(array, array.length);
-//    }
 
-    public void selectionSort(){
+    public static <T extends Comparable<? super T>> void selectionSort(T[] array){
+        int numberOfElements = array.length;
         for (int j = 0; j < numberOfElements - 1; j++)
         {
             int iMin = j;
@@ -73,37 +51,38 @@ public class Sorter<T extends Comparable<? super T>> {
                 if(array[i].compareTo(array[iMin]) < 0)
                     iMin = i;
             if (iMin != j)
-                swap(j, iMin);
+                swap(array, j, iMin);
         }
     }
 
-    public void quickSort(){
-        quickSort(0, numberOfElements - 1);
+    public static <T extends Comparable<? super T>> void quickSort(T[] array){
+        int numberOfElements = array.length;
+        quickSort(array, 0, numberOfElements - 1);
     }
 
-    private int partition(int left, int right){
+    private static <T extends Comparable<? super T>> int partition(T[] array, int left, int right){
         int pivotIndex = (left + right)/2;
         T pivotValue = array[pivotIndex];
-        swap(pivotIndex, right);
+        swap(array, pivotIndex, right);
         int storeIndex = left;
         for (int i = left; i <= right; i++)
             if(array[i].compareTo(pivotValue) < 0){
-                swap(i, storeIndex);
+                swap(array, i, storeIndex);
                 storeIndex++;
             }
-        swap(storeIndex, right);
+        swap(array, storeIndex, right);
         return  storeIndex;
     }
 
-    private void quickSort(int left, int right){
+    private static <T extends Comparable<? super T>> void quickSort(T[] array, int left, int right){
         if (left < right){
-            int p = partition(left, right);
-            quickSort(left, p - 1);
-            quickSort(p + 1, right);
+            int p = partition(array, left, right);
+            quickSort(array, left, p - 1);
+            quickSort(array, p + 1, right);
         }
     }
 
-    private void siftDown(int start, int end){
+    private static <T extends Comparable<? super T>> void siftDown(T[] array, int start, int end){
         int root = start;
 
         while (root * 2 + 1 <= end){
@@ -115,7 +94,7 @@ public class Sorter<T extends Comparable<? super T>> {
             if (child + 1 <= end && array[swapI].compareTo(array[child + 1]) < 0)
                 swapI = child + 1;
             if (swapI != root){
-                swap(root, swapI);
+                swap(array, root, swapI);
                 root = swapI;
             }
             else
@@ -124,40 +103,41 @@ public class Sorter<T extends Comparable<? super T>> {
     }
 
 
-    private void heapify(){
+    private static <T extends Comparable<? super T>> void heapify(T[] array){
+        int numberOfElements = array.length;
         int start = ((numberOfElements - 2) / 2);
 
         while (start >= 0){
-            siftDown(start, numberOfElements - 1);
+            siftDown(array, start, numberOfElements - 1);
             start--;
         }
     }
 
-//    public static void heapSort(int array[]){
-//        heapSort(array, array.length);
-//    }
 
-    public void heapSort(){
+    public static <T extends Comparable<? super T>> void heapSort(T[] array){
 
-        heapify();
+        int numberOfElements = array.length;
+        heapify(array);
 
         int end = numberOfElements - 1;
 
         while (end > 0){
-            swap(end, 0);
+            swap(array, end, 0);
             end--;
-            siftDown(0, end);
+            siftDown(array, 0, end);
         }
     }
 
 
-    public void mergeSort(){
+    public static <T extends Comparable<? super T>> void mergeSort(T[] array){
+        int numberOfElements = array.length;
+        //do not do this at home
         T[] temp = ((T[])java.lang.reflect.Array
                 .newInstance(array.getClass().getComponentType(), numberOfElements));
-        mergeSort(0, array.length - 1, temp);
+        mergeSort(array, 0, array.length - 1, temp);
     }
 
-    private void merge(int start, int middle, int end, T temp[]) {
+    private static <T extends Comparable<? super T>> void merge(T[] array, int start, int middle, int end, T temp[]) {
 
         for (int i = start; i <= end; i++) {
             temp[i] = array[i];
@@ -182,24 +162,25 @@ public class Sorter<T extends Comparable<? super T>> {
         }
     }
 
-    private void mergeSort(int start, int end, T temp[]){
+    private static <T extends Comparable<? super T>> void mergeSort(T[] array, int start, int end, T temp[]){
         if (start < end) {
             int middle = start + (end - start) / 2;
-            mergeSort(start, middle, temp);
-            mergeSort(middle + 1, end, temp);
-            merge(start, middle, end, temp);
+            mergeSort(array, start, middle, temp);
+            mergeSort(array, middle + 1, end, temp);
+            merge(array, start, middle, end, temp);
         }
     }
 
-    public void shuffle(){
+    public static <T extends Comparable<? super T>> void shuffle(T[] array){
+        int numberOfElements = array.length;
         Random rand = new Random();
         for (int i = 0; i < numberOfElements; i++){
             int newPos = rand.nextInt(numberOfElements);
-            swap(i, newPos);
+            swap(array, i, newPos);
         }
     }
 
-    public void printArray(){
+    public static <T extends Comparable<? super T>>  void printArray(T[] array){
         for (T element : array)
             System.out.printf("%s ", element);
         System.out.println();
